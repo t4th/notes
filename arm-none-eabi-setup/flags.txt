@@ -1,0 +1,5 @@
+doc: https://gcc.gnu.org/onlinedocs/gcc/index.html
+
+arm: https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html#ARM-Options
+
+overall options: https://gcc.gnu.org/onlinedocs/gcc-6.3.0/gcc/Overall-Options.html
