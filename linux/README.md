@@ -1,4 +1,5 @@
-Commands:
+# linux
+## commands
 
 cd ~     home dir.
 cd -     (minus) previous dir

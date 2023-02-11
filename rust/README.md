@@ -1,3 +1,11 @@
+# rurst
+
+## install
+```
+$ curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
+```
+
+## cargo
 cargo is default rust packet manager
 it list dependancies, update them and allow to lock the versions
 
