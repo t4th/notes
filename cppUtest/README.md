@@ -32,6 +32,76 @@ mock().expectOneCall("someFunc").
     andReturnValue(true);
 ```
 
+### Custom comparator
+
+```c++
+struct Frame_t
+{
+    int a;
+    unsigned b;
+    char c[2];
+};
+
+void sendFrame(Frame_t * frame)
+{
+  return mock().actualCall("sendFrame").
+    withParameterOfType("Frame_t", "frame", frame);
+}
+
+[...]
+
+class Frame_t_Comparator : public MockNamedValueComparator
+{
+public:
+    bool isEqual(const void* _left, const void* _right) override
+    {
+        // Casting here the void pointers to the type to compare
+        const Frame_t *left = (const Frame_t *) _left; 
+        const Frame_t *right = (const Frame_t *) _right;
+
+        if (left->a == right->a && left->b == right->b)
+        {
+          return 0 == memcmp(left->c, right->c, 2);
+        }
+        else
+          return false;
+    }
+    virtual SimpleString valueToString(const void* object)
+    {
+        return (char *) "string";
+    }
+};
+
+TEST_GROUP(test_group)
+{
+  CanFrameTypeComparator canFrameTypeComparator;
+  void setup()
+  {
+      mock().installComparator("Frame_t", Frame_t_Comparator);
+      mock().crashOnFailure(false);
+  }
+
+  void teardown()
+  {
+      mock().removeAllComparatorsAndCopiers();
+      mock().clear();
+  }
+};
+
+[...]
+
+TEST(test_group, TestName)
+{
+  Frame_t expected_frame =
+  {
+    -123, 0xA, {0xFF,0x0C}
+  };
+
+  mock().expectOneCall("sendFrame").
+    withParameterOfType("Frame_t", "frame", &expected_frame);
+}
+```
+
 ### Custom copier
 
 ```c++
@@ -53,33 +123,36 @@ public:
 
 TEST_GROUP(test_group)
 {
-VectorCopier copier;
-
-void setup()
-{
-    mock().installCopier("ByteVector", copier);
-    mock().crashOnFailure(false);
-}
-
-void teardown()
-{
-    mock().removeAllComparatorsAndCopiers();
-    mock().clear();
-}
+    VectorCopier copier;
+    
+    void setup()
+    {
+        mock().installCopier("ByteVector", copier);
+        mock().crashOnFailure(false);
+    }
+    
+    void teardown()
+    {
+        mock().removeAllComparatorsAndCopiers();
+        mock().clear();
+    }
 };
 
 [...]
 
-std::vector<uint8_t> responseMockData{
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x01, 0x00, 0x00
-};
-
-mock().expectOneCall("class::send")
-    .withUnsignedIntParameter("id", id)
-    .withOutputParameterOfTypeReturning("ByteVector", "response", &responseMockData)
-    .ignoreOtherParameters()
-    .andReturnValue(true);
+TEST(test_group, TestName)
+{
+    std::vector<uint8_t> responseMockData{
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x01, 0x00, 0x00
+    };
+    
+    mock().expectOneCall("class::send")
+        .withUnsignedIntParameter("id", id)
+        .withOutputParameterOfTypeReturning("ByteVector", "response", &responseMockData)
+        .ignoreOtherParameters()
+        .andReturnValue(true);
+}
 
 [...]
 
@@ -105,14 +178,17 @@ const File::Header & File::GetHeader() const
 
 [...]
 
-File::FileHeader mockFileHeader =
+TEST(test_group, TestName)
 {
-    "name", 123, 123
-};
-
-mock().expectOneCall("File::GetHeader")
-    .ignoreOtherParameters()
-    .andReturnValue(&mockFileHeader);
+    File::FileHeader mockFileHeader =
+    {
+        "name", 123, 123
+    };
+    
+    mock().expectOneCall("File::GetHeader")
+        .ignoreOtherParameters()
+        .andReturnValue(&mockFileHeader);
+}
 ```
 
 ### store data passed as reference to external vector
@@ -120,22 +196,25 @@ mock().expectOneCall("File::GetHeader")
 Capture data passed by mocked function to external vector.
 
 ```c++
-std::vector<uint8_t> externalVector{};
-
-mock().setData("DataOutputVector", &externalVector);
-
-// expect some 0xff command
-mock().expectOneCall("Protocol::SendCommand").
-    .ignoreOtherParameters()
-    andReturnValue(true);
-
-// expected some other cmd with expected input
-uint8_t expected_data[2] = {1,2};
-
-mock().expectOneCall("Protocol::SendCommand").
-    withMemoryBufferParameter("data",expected_data, sizeof(expected_data)).
-    withUnsignedIntParameter("len", sizeof(expected_data)).
-    andReturnValue(true);
+TEST(test_group, TestName)
+{
+    std::vector<uint8_t> externalVector{};
+    
+    mock().setData("DataOutputVector", &externalVector);
+    
+    // expect some 0xff command
+    mock().expectOneCall("Protocol::SendCommand").
+        .ignoreOtherParameters()
+        andReturnValue(true);
+    
+    // expected some other cmd with expected input
+    uint8_t expected_data[2] = {1,2};
+    
+    mock().expectOneCall("Protocol::SendCommand").
+        withMemoryBufferParameter("data",expected_data, sizeof(expected_data)).
+        withUnsignedIntParameter("len", sizeof(expected_data)).
+        andReturnValue(true);
+}
 
 [...]
 
