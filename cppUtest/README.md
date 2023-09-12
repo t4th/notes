@@ -74,10 +74,10 @@ public:
 
 TEST_GROUP(test_group)
 {
-  CanFrameTypeComparator canFrameTypeComparator;
+  Frame_t_Comparator frame_t_Comparator;
   void setup()
   {
-      mock().installComparator("Frame_t", Frame_t_Comparator);
+      mock().installComparator("Frame_t", frame_t_Comparator);
       mock().crashOnFailure(false);
   }
 
