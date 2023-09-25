@@ -1,6 +1,8 @@
 # cmake
-
-cmake . // generate and build from the current dir
+generate and build from the current dir
+```
+cmake .
+```
 
 ## single file
 CMakeList.txt
