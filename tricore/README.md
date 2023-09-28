@@ -25,6 +25,9 @@ exit
 ## ecc detection
 ECCD Memory ECC Detection Register
 DSPR in one cpu can corrupt ecc in other cpu.
+
+Accessing memory that has been erased will result in ECC trap, because erasing reset ECC values.
+If ECC trap is set to reset HW, the code can spiral into endless reset loop.
 ## enable/disable debuging
 Register PROCONDBG in PMU
 ```
