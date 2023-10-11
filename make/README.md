@@ -9,6 +9,10 @@ binutils
 srec_info
 srec_cat
 ```
+```
+readelf -a file.out
+readelf -w file.out
+```
 
 ## arguments
 ```
