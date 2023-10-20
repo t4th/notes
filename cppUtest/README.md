@@ -1,6 +1,32 @@
 # CppUTest
 ## setup
 
+cmake
+```c++
+cmake_minimum_required (VERSION 3.8)
+
+project ("RunAllTests")
+
+# c++ include paths
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/CppUTest/include)
+
+# this is to detect CppUTest::CppUTest and CppUTest::CppUTestExt
+# defined in cmakelist.txt in this dir
+add_subdirectory(CppUTest)
+
+# define runnable
+add_executable (RunAllTests "test_runnable.cpp" 
+  test_case1.cpp
+  test_case2.cpp)
+
+target_compile_features(RunAllTests PRIVATE cxx_std_17)
+
+# define link items for runnable
+target_link_libraries(RunAllTests PRIVATE
+    CppUTest::CppUTest
+    CppUTest::CppUTestExt)
+```
+
 ## Mock recipes
 
 ### normal arguments
