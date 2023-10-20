@@ -2,7 +2,7 @@
 ## setup
 
 cmake
-```c++
+```cmake
 cmake_minimum_required (VERSION 3.8)
 
 project ("RunAllTests")
