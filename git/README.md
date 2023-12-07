@@ -52,3 +52,5 @@ fi
 
 unset env
 ```
+
+tortoise git: network -> ssh client -> C:\Program Files\Git\usr\bin\ssh.exe
