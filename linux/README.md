@@ -1,6 +1,9 @@
 # linux
 ## commands
 
+nohup npm start & - nohup "no hang up" after exit ssh session; & start npm in bg
+ps aux | grep npm - to find process id and kill it
+
 cd ~     home dir.
 cd -     (minus) previous dir
 
