@@ -1,79 +1,145 @@
 # linux
 ## commands
 
-nohup npm start & - nohup "no hang up" after exit ssh session; & start npm in bg
-ps aux | grep npm - to find process id and kill it
+```console
+nohup npm start & # nohup "no hang up" after exit ssh session; & start npm in bg
+```
 
-cd ~     home dir.
-cd -     (minus) previous dir
+```console
+ps aux | grep npm # to find process id and kill it
+```
 
+```console
+cd ~   #  home dir.
+cd -   #  (minus) previous dir
+```
+
+```
 /usr/bin    dir where linux is looking for apps called from the terminal
+```
 
-ln      linux version of junction: sudo ln -s /source/binary /usr/bin
-unlink  remove link
+```console
+ln      # linux version of junction: sudo ln -s /source/binary /usr/bin
+unlink  # remove link
+```
 
-rm      remove. -r recursive. -rf (recursive, force)
+```console
+rm     # remove. -r recursive. -rf (recursive, force)
+```
 
-touch    create new file, ie. touch file.txt
+```console
+touch   # create new file, ie. touch file.txt
+```
 
-apt-get install    fetch, update
+```console
+apt-get install   # ubuntu fetch, update
+```
 
-cat     display file content
+```console
+cat    # display file content
+```
 
-less    display file content. Navigate with arrows and quit with Q
+```console
+less   # display file content. Navigate with arrows and quit with Q
+```
 
-wc      word counter. -l count the lines
+```console
+man  #  manual. man wc
+```
 
-man    manual. man wc
+```
+--help # standard info flag
+```
 
---help
+```console
+wc     # word counter. -l count the lines
+```
 
-usage:
+```console
+wc -l *.txt    # cound number of lines in txt files
+```
 
-wc -l *.txt     cound number of liens in txt files
+```console
+ls -l  #  -l long 
+```
 
-ls -l    -l long 
-
+```console
 clear or ctrl+l
+```
 
-find <where> -iname '*text.txt'    find *
+```console
+find <where> -iname '*text.txt'   # find *
+```
 
+```
 pipe |
+```
 
+```console
 find -name 'name' | wc -l    
-find -name 'name' > ../list.txt    cmd output redirection
+find -name 'name' > ../list.txt   # cmd output redirection
+```
 
-mv <co> .    dot is current dir
+```console
+mv <co> . # move
+```
 
-chmod +x    change mode to execute
+```console
+chmod +x   # change mode to execute
+```
 
+```console
 gzip    zip
 guzip    unzip
 tar -czpf ../output.tar.gz ./    . Tape archive
 tar -ztf output.tar.gz | less
 tar -zxf output.tar.gz
+```
 
-grep e file.txt     search for 'e' in a file
-grep ^t    lines starting with 'T'
-grep -E '^T.+n$' file.txt    E as extended, which is regex
+```console
+grep e file.txt              # search for 'e' in a file
+grep ^t                      # lines starting with 'T'
+grep -E '^T.+n$' file.txt    # E as extended, which is regex
+```
 
-cat file*.txt | grep '^k' | sort    find in files and sort
+```console
+cat file*.txt | grep '^k' | sort   # find in files and sort
+```
 
-alt + .    repeat the last argument. Ex. mkdir -p asd/ad/22/d, cd alt+
+```console
+alt + .  #  repeat the last argument. Ex. mkdir -p asd/ad/22/d, cd alt+
+```
 
-ctrl+u    copy the current command to bash stash
-ctrl+y    recover command from stash
+```console
+ctrl+u   # copy the current command to bash stash
+ctrl+y   # recover command from stash
+```
 
-ctrl + t     fix errors in command
+```console
+ctrl + t    # fix errors in command
+```
 
+```console
 echo some funny text
-^funny^ugly     call previous command with replaced text
+^funny^ugly    # call previous command with replaced text
+```
 
-ctrl + x,e    command edit
-shuf -e {1..10}    generate random numbers
+```console
+ctrl + x,e   # command edit
+```
 
+```console
+shuf -e {1..10}   # generate random numbers
+```
+
+```console
 ctrl+shift+c /v
+```
 
-ctrl + r    revers search through bash history
+```console
+ctrl + r   # reverse search through bash history
+```
 
-!!    attach sudo to cmd
+```console
+!!   # attach sudo to cmd
+```
