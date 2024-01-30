@@ -32,3 +32,41 @@ target_link_libraries(
   GTest::gmock
 )
 ```
+
+## generate files
+file.c.in
+```C
+stuffType stuff = {
+    .asd = "@ASD@",
+    .asd2 = "@ASD2@"
+};
+```
+
+```
+set(ASD "foo")
+set(ASD2 "foo2")
+
+add_library(Asd)
+
+set(in_c_file     "${CMAKE_CURRENT_SOURCE_DIR}/file.c.in"   )
+set(out_c_file    "${CMAKE_CURRENT_BINARY_DIR}/file.c"      )
+
+cmake_language(EVAL CODE
+    "
+    function(Asd_configure_file)
+        message(STATUS \"Writing: ${out_c_file}\")
+        configure_file(\"${in_c_file}\" \"${out_c_file}\" @ONLY)
+    endfunction()
+    "
+)
+
+cmake_language(DEFER DIRECTORY ${CMAKE_SOURCE_DIR} CALL Asd_configure_file)
+
+
+target_sources(Asd PRIVATE ${out_c_file})
+
+target_include_directories(Asd
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+```
