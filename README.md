@@ -13,7 +13,7 @@ js post
 ```javascript
     var data0 = document.getElementById("data0").value;
     var data1 = document.getElementById("data1").value;
-    var params = `inverter=${data0}&inverter-sn=${data1}`
+    var params = `data0=${data0}&data1=${data1}`
     
     var req = new XMLHttpRequest();
     req.open("POST", "custom.cgi");
@@ -170,4 +170,11 @@ int main()
 
     return 0;
 }
+```
+
+send get and post with curl on windows
+
+```bat
+curl --header "Content-Type: application/json" --request POST --data "" localhost
+curl --header localhost
 ```
