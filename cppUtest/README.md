@@ -1,4 +1,19 @@
 # CppUTest
+## usage
+intstall gcc and cmake
+```bash
+sudo apt install build-essential
+sudo apt install cmake
+```
+in project dir
+```bash
+mkdir build
+cd build
+cmake ..
+make
+make test
+```
+
 ## setup
 
 cmake
