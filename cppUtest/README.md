@@ -281,3 +281,9 @@ bool SendCommand(uint8_t cmd, const uint8_t & data, size_t len)
         returnBoolValue();
 }
 ```
+
+for storing custom function pointer use
+```
+typedef void (* func_t)( int i );
+mock().setDataObject("funcPtr","func_t", (void*)pointer_arg);
+```
