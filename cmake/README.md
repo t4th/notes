@@ -1,12 +1,12 @@
 # cmake
 generate and build from the current dir
-```
+```console
 cmake .
 ```
 
 ## single file
 CMakeList.txt
-```
+```cmake
 cmake_minimum_required (VERSION 3.8)
 
 project("project name")
@@ -15,7 +15,7 @@ add_executable( Temp "src/main.cpp")
 ```
 
 ## google test
-```
+```cmake
 cmake_minimum_required (VERSION 3.8)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -42,7 +42,7 @@ stuffType stuff = {
 };
 ```
 
-```
+```cmake
 set(ASD "foo")
 set(ASD2 "foo2")
 
