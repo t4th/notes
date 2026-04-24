@@ -1,4 +1,10 @@
 # linux
+
+## remote rdp
+sudo apt-install xrdp
+sudo service xrdp start
+ifconfig
+
 ## commands
 
 ```console
