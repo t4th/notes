@@ -32,3 +32,20 @@ echo "address=/shelf-focal.local/192.168.1.50" | sudo tee /etc/dnsmasq.d/local.c
 # Restart
 sudo systemctl restart dnsmasq
 Then point your router's DNS to this machine's IP.
+
+
+### move ubuntu do other dir
+
+```
+Export Ubuntu
+
+mkdir D:\backup
+wsl --export Ubuntu D:\backup\ubuntu.tar
+Unregister the same distribution to remove it from the C: drive:
+
+wsl --unregister Ubuntu
+Import Ubuntu
+
+mkdir D:\wsl
+wsl --import Ubuntu D:\wsl\ D:\backup\ubuntu.tar
+```
