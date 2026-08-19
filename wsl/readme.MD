@@ -49,3 +49,16 @@ Import Ubuntu
 mkdir D:\wsl
 wsl --import Ubuntu D:\wsl\ D:\backup\ubuntu.tar
 ```
+
+### release reserved disk space
+```
+wsl --shutdown
+diskpart
+# open window Diskpart
+select vdisk file=".\ext4.vhdx"
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+
+```
